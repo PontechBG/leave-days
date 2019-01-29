@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
+import { yearHasChanged } from '../data/holidays';
+import YearWarningDialog from './YearWarningDialog';
 import InputForm from './InputForm';
 import PrintForm from './PrintForm';
 
@@ -23,6 +25,7 @@ class MainPage extends React.Component {
     super(props, context);
 
     this.state = {
+      yearWarning: yearHasChanged(new Date()),
       isReadyForPrint: false,
       userName: '',
       fromDate: new Date(),
@@ -32,6 +35,7 @@ class MainPage extends React.Component {
     };
 
     this.onReady = this.onReady.bind(this);
+    this.onYearWarningDialogClose = this.onYearWarningDialogClose.bind(this);
   }
 
   onReady(data) {
@@ -47,12 +51,19 @@ class MainPage extends React.Component {
     });
   }
 
+  onYearWarningDialogClose() {
+    this.setState({
+      yearWarning: false
+    });
+  }
+
   render() {
     const { classes } = this.props;
-    const { isReadyForPrint, userName, fromDate, toDate, documentDate, numberOfDays, deputy, isPaid } = this.state;
+    const { yearWarning, isReadyForPrint, userName, fromDate, toDate, documentDate, numberOfDays, deputy, isPaid } = this.state;
 
     return (
       <main className={classes.layout}>
+        <YearWarningDialog open={yearWarning} onClose={this.onYearWarningDialogClose} />
         {isReadyForPrint ? (
           <PrintForm
             userName={userName}

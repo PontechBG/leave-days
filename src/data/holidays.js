@@ -8,19 +8,25 @@
 // 22 септември – Ден на независимостта на България.
 // 24, 25, 26 декември – Коледа.
 
+let year = 2019;
+
 let holidays = [
-  '2019/01/01',
-  '2019/03/03',
-  '2019/05/01',
-  '2019/05/06',
-  '2019/05/24',
-  '2019/09/06',
-  '2019/09/22',
-  '2019/12/24',
-  '2019/12/25',
-  '2019/12/26'
+  'YYYY/01/01',
+  'YYYY/03/03',
+  'YYYY/05/01',
+  'YYYY/05/06',
+  'YYYY/05/24',
+  'YYYY/09/06',
+  'YYYY/09/22',
+  'YYYY/12/24',
+  'YYYY/12/25',
+  'YYYY/12/26'
 ];
 
-holidays = holidays.map(day => new Date(day));
+holidays = holidays.map(day => new Date(day.replace('YYYY', year)));
 
-export default holidays;
+export { holidays };
+
+export function yearHasChanged(date) {
+  return date.getFullYear() !== year;
+}

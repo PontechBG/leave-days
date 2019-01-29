@@ -1,4 +1,4 @@
-import holidays from '../data/holidays';
+import { holidays } from '../data/holidays';
 
 const replaceAll = (str, find, replace) => {
   return str.replace(new RegExp(find, 'g'), replace);
