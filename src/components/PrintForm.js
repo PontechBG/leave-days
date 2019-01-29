@@ -5,7 +5,7 @@ import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 // import ScratchedText from './ScratchedText';
 import { formatDate } from '../helpers';
-import { getUser } from '../users';
+import { getUser } from '../data/users';
 
 const styles = theme => ({
   layout: {

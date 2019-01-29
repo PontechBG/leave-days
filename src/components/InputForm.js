@@ -8,10 +8,10 @@ import Fade from '@material-ui/core/Fade';
 import Switch from '@material-ui/core/Switch';
 import Button from '@material-ui/core/Button';
 import MenuItem from '@material-ui/core/MenuItem';
-import TextField from '@material-ui/core/TextField';
 import Select from '@material-ui/core/Select';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-import { getUser, getUsers, getDeputiesFor } from '../users';
+import { getUser, getUsers, getDeputiesFor } from '../data/users';
+import { isWorkingDay, countDays } from '../helpers';
 import DatePicker from 'react-datepicker';
 import red from '@material-ui/core/colors/red';
 
@@ -57,8 +57,8 @@ class InputFormNew extends React.Component {
       userName: initialUserName,
       fromDate: new Date(),
       toDate: new Date(),
+      numberOfDays: 0,
       documentDate: new Date(),
-      numberOfDays: 1,
       deputy: initialDeputyName,
       isPaid: true
     };
@@ -69,6 +69,7 @@ class InputFormNew extends React.Component {
 
   onReady() {
     const data = Object.assign({}, this.state);
+    data.numberOfDays = countDays(data.fromDate, data.toDate);
 
     // save to browser's local storage
     localStorage.setItem('leaveDaysUserName', data.userName);
@@ -87,7 +88,8 @@ class InputFormNew extends React.Component {
   render() {
     const { classes } = this.props;
 
-    const { userName, fromDate, toDate, documentDate, deputy, isPaid, numberOfDays } = this.state;
+    const { userName, fromDate, toDate, documentDate, deputy, isPaid } = this.state;
+    const numberOfDays = countDays(fromDate, toDate);
     const position = getUser(userName).position;
     const users = getUsers();
     const deputies = getDeputiesFor(userName);
@@ -136,19 +138,7 @@ class InputFormNew extends React.Component {
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Уважаеми г-н Управител,
               </Typography>
               <Typography variant="subtitle1" align="justify" gutterBottom>
-                &nbsp;&nbsp;&nbsp;&nbsp;Моля да ми разрешите използването на{' '}
-                {
-                  <TextField
-                    id="numberOfDays"
-                    name="numberOfDays"
-                    type="number"
-                    className={classes.textField}
-                    value={numberOfDays}
-                    onChange={this.onFieldChange}
-                    margin="normal"
-                  />
-                }
-                {numberOfDays === 1 ? 'ден' : 'дни'}{' '}
+                &nbsp;&nbsp;&nbsp;&nbsp;Моля да ми разрешите използването на {numberOfDays} {numberOfDays === 1 ? 'ден' : 'дни'}{' '}
                 {
                   <FormControlLabel
                     control={
@@ -165,9 +155,10 @@ class InputFormNew extends React.Component {
                     label={isPaid ? 'Платен' : 'Неплатен'}
                   />
                 }{' '}
-                годишен отпуск, считано от &nbsp;
+                годишен отпуск, считано от{' '}
                 {
                   <DatePicker
+                    filterDate={isWorkingDay}
                     className={classes.userInput}
                     id="fromDate"
                     dateFormat="dd.MM.yyyy"
@@ -176,21 +167,22 @@ class InputFormNew extends React.Component {
                       this.setState({ fromDate: date });
                     }}
                   />
-                }
-                &nbsp; до &nbsp;
+                }{' '}
+                до{' '}
                 {
                   <DatePicker
+                    filterDate={isWorkingDay}
                     className={classes.userInput}
                     id="toDate"
                     dateFormat="dd.MM.yyyy"
                     minDate={fromDate}
-                    selected={toDate}
+                    selected={fromDate <= toDate ? toDate : fromDate}
                     onChange={date => {
                       this.setState({ toDate: date });
                     }}
                   />
-                }
-                &nbsp; включително.
+                }{' '}
+                включително.
               </Typography>
               <Typography variant="subtitle1" align="justify" gutterBottom>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;По време на отпуската ще бъда заместван от{' '}
@@ -220,6 +212,7 @@ class InputFormNew extends React.Component {
                 Датa:&nbsp;
                 {
                   <DatePicker
+                    filterDate={isWorkingDay}
                     className={classes.userInput}
                     id="documentDate"
                     dateFormat="dd.MM.yyyy"

@@ -1,3 +1,5 @@
+import holidays from '../data/holidays';
+
 const replaceAll = (str, find, replace) => {
   return str.replace(new RegExp(find, 'g'), replace);
 };
@@ -7,9 +9,17 @@ export function generateId(text) {
 }
 
 export function countDays(fromDate, toDate) {
-  const day = 24 * 60 * 60 * 1000;
+  let count = 1;
+  let curDate = new Date(fromDate);
 
-  return Math.round(Math.abs(fromDate.getTime() - toDate.getTime()) / day);
+  while (curDate < toDate) {
+    count += isWorkingDay(curDate) ? 1 : 0;
+    // add one day
+    curDate = new Date(curDate);
+    curDate.setDate(curDate.getDate() + 1);
+  }
+
+  return count;
 }
 
 export function formatDate(date) {
@@ -21,4 +31,12 @@ export function formatDate(date) {
   mm = mm > 9 ? mm : '0' + mm;
 
   return `${dd}.${mm}.${yyyy}`;
+}
+
+export function isWorkingDay(date) {
+  return [0, 6].includes(date.getDay()) === false && isHoliday(date) === false;
+}
+
+export function isHoliday(date) {
+  return holidays.findIndex(d => d.toDateString() === date.toDateString()) !== -1;
 }
