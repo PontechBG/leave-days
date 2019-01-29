@@ -141,6 +141,7 @@ class InputFormNew extends React.Component {
                   <TextField
                     id="numberOfDays"
                     name="numberOfDays"
+                    type="number"
                     className={classes.textField}
                     value={numberOfDays}
                     onChange={this.onFieldChange}
@@ -170,7 +171,6 @@ class InputFormNew extends React.Component {
                     className={classes.userInput}
                     id="fromDate"
                     dateFormat="dd.MM.yyyy"
-                    minDate={new Date()}
                     selected={fromDate}
                     onChange={date => {
                       this.setState({ fromDate: date });
@@ -223,7 +223,6 @@ class InputFormNew extends React.Component {
                     className={classes.userInput}
                     id="documentDate"
                     dateFormat="dd.MM.yyyy"
-                    minDate={new Date()}
                     selected={documentDate}
                     onChange={date => {
                       this.setState({ documentDate: date });
