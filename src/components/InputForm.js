@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Grid from '@material-ui/core/Grid';
+import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import Fade from '@material-ui/core/Fade';
@@ -26,6 +27,9 @@ const styles = theme => ({
       marginLeft: 'auto',
       marginRight: 'auto'
     }
+  },
+  paper: {
+    padding: 30
   },
   textField: {
     padding: 0,
@@ -91,115 +95,28 @@ class InputFormNew extends React.Component {
     return (
       <main className={classes.layout}>
         <Grid container spacing={24} justify="center">
-          <Grid item xs={12}>
-            <Typography variant="h4" align="center" gutterBottom>
-              <b>Молба за ползване на отпуск</b>
-            </Typography>
-          </Grid>
-          <Grid item xs={8} />
-          <Fade in={true} timeout={1000}>
+          <Paper className={classes.paper}>
             <Grid item xs={12}>
-              <Typography variant="subtitle1">От</Typography>
-              <Select
-                autoFocus
-                className={classes.userInput}
-                fullWidth
-                value={userName}
-                onChange={this.onFieldChange}
-                inputProps={{
-                  name: 'userName',
-                  id: 'userName'
-                }}
-              >
-                {users.map(user => {
-                  return (
-                    <MenuItem key={user.id} value={user.name}>
-                      {user.name}
-                    </MenuItem>
-                  );
-                })}
-              </Select>
+              <Typography variant="h5" align="center" gutterBottom>
+                <b>Молба за ползване на отпуск</b>
+              </Typography>
             </Grid>
-          </Fade>
-          <Grid item xs={12}>
-            <Typography variant="subtitle1" align="center" gutterBottom>
-              Длъжност: {position}
-            </Typography>
-          </Grid>
-          <Grid item xs={12}>
-            <Typography variant="subtitle1" align="left" gutterBottom>
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Уважаеми г-н Управител,
-            </Typography>
-            <Typography variant="subtitle1" align="justify" gutterBottom>
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Моля да ми разрешите използването на{' '}
-              {
-                <TextField
-                  id="numberOfDays"
-                  name="numberOfDays"
-                  className={classes.textField}
-                  value={numberOfDays}
-                  onChange={this.onFieldChange}
-                  margin="normal"
-                />
-              }
-              {numberOfDays === 1 ? 'ден' : 'дни'}{' '}
-              {
-                <FormControlLabel
-                  control={
-                    <Switch
-                      checked={isPaid}
-                      inputProps={{
-                        name: 'isPaid',
-                        id: 'isPaid'
-                      }}
-                      onChange={this.onFieldChange}
-                      value={isPaid}
-                    />
-                  }
-                  label={isPaid ? 'Платен' : 'Неплатен'}
-                />
-              }{' '}
-              годишен отпуск, считано от &nbsp;
-              {
-                <DatePicker
-                  className={classes.userInput}
-                  id="fromDate"
-                  dateFormat="dd.MM.yyyy"
-                  minDate={new Date()}
-                  selected={fromDate}
-                  onChange={date => {
-                    this.setState({ fromDate: date });
-                  }}
-                />
-              }
-              &nbsp; до &nbsp;
-              {
-                <DatePicker
-                  className={classes.userInput}
-                  id="toDate"
-                  dateFormat="dd.MM.yyyy"
-                  minDate={fromDate}
-                  selected={toDate}
-                  onChange={date => {
-                    this.setState({ toDate: date });
-                  }}
-                />
-              }
-              &nbsp; включително.
-            </Typography>
-            <Typography variant="subtitle1" align="justify" gutterBottom>
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;По време на отпуската ще бъда заместван от{' '}
-              {
+            <Grid item xs={8} />
+            <Fade in={true} timeout={1000}>
+              <Grid item xs={12}>
+                <Typography variant="subtitle1">От</Typography>
                 <Select
+                  autoFocus
                   className={classes.userInput}
-                  value={deputy}
+                  fullWidth
+                  value={userName}
                   onChange={this.onFieldChange}
                   inputProps={{
-                    name: 'deputy',
-                    id: 'deputy'
+                    name: 'userName',
+                    id: 'userName'
                   }}
                 >
-                  {deputies.map(user => {
+                  {users.map(user => {
                     return (
                       <MenuItem key={user.id} value={user.name}>
                         {user.name}
@@ -207,31 +124,120 @@ class InputFormNew extends React.Component {
                     );
                   })}
                 </Select>
-              }
-            </Typography>
-          </Grid>
-          <Grid item xs={12}>
-            <Typography variant="subtitle1" align="left">
-              Датa:&nbsp;
-              {
-                <DatePicker
-                  className={classes.userInput}
-                  id="documentDate"
-                  dateFormat="dd.MM.yyyy"
-                  minDate={new Date()}
-                  selected={documentDate}
-                  onChange={date => {
-                    this.setState({ documentDate: date });
-                  }}
-                />
-              }
-            </Typography>
-          </Grid>
-          <Grid style={{ textAlign: 'center' }} item xs={12}>
-            <Button variant="contained" color="primary" onClick={this.onReady}>
-              Принтирай
-            </Button>
-          </Grid>
+              </Grid>
+            </Fade>
+            <Grid item xs={12}>
+              <Typography variant="subtitle1" align="center" gutterBottom>
+                Длъжност: {position}
+              </Typography>
+            </Grid>
+            <Grid item xs={12}>
+              <Typography variant="subtitle1" align="left" gutterBottom>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Уважаеми г-н Управител,
+              </Typography>
+              <Typography variant="subtitle1" align="justify" gutterBottom>
+                &nbsp;&nbsp;&nbsp;&nbsp;Моля да ми разрешите използването на{' '}
+                {
+                  <TextField
+                    id="numberOfDays"
+                    name="numberOfDays"
+                    className={classes.textField}
+                    value={numberOfDays}
+                    onChange={this.onFieldChange}
+                    margin="normal"
+                  />
+                }
+                {numberOfDays === 1 ? 'ден' : 'дни'}{' '}
+                {
+                  <FormControlLabel
+                    control={
+                      <Switch
+                        checked={isPaid}
+                        inputProps={{
+                          name: 'isPaid',
+                          id: 'isPaid'
+                        }}
+                        onChange={this.onFieldChange}
+                        value={isPaid}
+                      />
+                    }
+                    label={isPaid ? 'Платен' : 'Неплатен'}
+                  />
+                }{' '}
+                годишен отпуск, считано от &nbsp;
+                {
+                  <DatePicker
+                    className={classes.userInput}
+                    id="fromDate"
+                    dateFormat="dd.MM.yyyy"
+                    minDate={new Date()}
+                    selected={fromDate}
+                    onChange={date => {
+                      this.setState({ fromDate: date });
+                    }}
+                  />
+                }
+                &nbsp; до &nbsp;
+                {
+                  <DatePicker
+                    className={classes.userInput}
+                    id="toDate"
+                    dateFormat="dd.MM.yyyy"
+                    minDate={fromDate}
+                    selected={toDate}
+                    onChange={date => {
+                      this.setState({ toDate: date });
+                    }}
+                  />
+                }
+                &nbsp; включително.
+              </Typography>
+              <Typography variant="subtitle1" align="justify" gutterBottom>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;По време на отпуската ще бъда заместван от{' '}
+                {
+                  <Select
+                    className={classes.userInput}
+                    value={deputy}
+                    onChange={this.onFieldChange}
+                    inputProps={{
+                      name: 'deputy',
+                      id: 'deputy'
+                    }}
+                  >
+                    {deputies.map(user => {
+                      return (
+                        <MenuItem key={user.id} value={user.name}>
+                          {user.name}
+                        </MenuItem>
+                      );
+                    })}
+                  </Select>
+                }
+              </Typography>
+            </Grid>
+            <Grid item xs={12}>
+              <Typography variant="subtitle1" align="left">
+                Датa:&nbsp;
+                {
+                  <DatePicker
+                    className={classes.userInput}
+                    id="documentDate"
+                    dateFormat="dd.MM.yyyy"
+                    minDate={new Date()}
+                    selected={documentDate}
+                    onChange={date => {
+                      this.setState({ documentDate: date });
+                    }}
+                  />
+                }
+              </Typography>
+            </Grid>
+            <Grid style={{ textAlign: 'center' }} item xs={12}>
+              <Button variant="contained" color="primary" onClick={this.onReady}>
+                Принтирай
+              </Button>
+            </Grid>
+          </Paper>
         </Grid>
       </main>
     );

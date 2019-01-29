@@ -10,6 +10,8 @@ import MainPage from './components/MainPage';
 
 const theme = createMuiTheme(customTheme);
 
+document.title = 'Молба за отпуск';
+
 ReactDOM.render(
   <div>
     <MuiThemeProvider theme={theme}>

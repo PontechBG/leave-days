@@ -2,16 +2,13 @@ import expect from 'expect';
 import React from 'react';
 import { mount, shallow } from 'enzyme';
 import MainPage from './MainPage';
-
-const setup = (is) => {
-    return shallow(<MainPage {...props}/>);
-  };
+import { configure } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
+configure({ adapter: new Adapter() });
 
 describe('MainPage tests', () => {
   it('MainPage renders without crashing', () => {
-      const w
-    const div = document.createElement('div');
-    ReactDOM.render(<App />, div);
-    ReactDOM.unmountComponentAtNode(div);
+    const page = mount(<MainPage />);
+    expect(page.find('main').length).toEqual(2);
   });
 });
