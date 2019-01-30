@@ -8,14 +8,14 @@ export function generateId(text) {
   return replaceAll(text.toLowerCase(), ' ', '-');
 }
 
-export function countDays(fromDate, toDate) {
+export function countDays(fromDate, toDate, workingDaysOnly = true) {
   fromDate.setHours(0, 0, 0, 0);
   toDate.setHours(0, 0, 0, 0);
   let count = 0;
   let curDate = new Date(fromDate);
 
   while (curDate <= toDate) {
-    count += isWorkingDay(curDate) ? 1 : 0;
+    count += workingDaysOnly ? (isWorkingDay(curDate) ? 1 : 0) : 1;
     // add one day
     curDate = new Date(curDate);
     curDate.setDate(curDate.getDate() + 1);
