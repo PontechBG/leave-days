@@ -20,7 +20,7 @@ const styles = theme => ({
   }
 });
 
-class MainPage extends React.Component {
+export class MainPage extends React.Component {
   constructor(props, context) {
     super(props, context);
 

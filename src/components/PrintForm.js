@@ -22,9 +22,9 @@ const styles = theme => ({
   }
 });
 
-class PrintForm extends React.Component {
+export class PrintForm extends React.Component {
   componentDidMount() {
-    window.print();
+    if (window && window.hasOwnProperty('print')) window.print();
   }
 
   render() {
