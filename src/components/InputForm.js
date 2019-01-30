@@ -12,6 +12,7 @@ import Select from '@material-ui/core/Select';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import { getUser, getUsers, getDeputiesFor } from '../data/users';
 import { isWorkingDay, countDays } from '../helpers';
+import { holidays } from '../data/holidays';
 import DatePicker from 'react-datepicker';
 import red from '@material-ui/core/colors/red';
 
@@ -63,8 +64,45 @@ class InputFormNew extends React.Component {
       isPaid: true
     };
 
+    this.highlightDates = this.highlightDates.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.handleChangeStart = this.handleChangeStart.bind(this);
+    this.handleChangeEnd = this.handleChangeEnd.bind(this);
     this.onFieldChange = this.onFieldChange.bind(this);
     this.onReady = this.onReady.bind(this);
+  }
+
+  highlightDates() {
+    return [
+      {
+        'react-datepicker__day--highlighted-from-date': [this.state.fromDate]
+      },
+      {
+        'react-datepicker__day--highlighted-to-date': [this.state.toDate]
+      },
+      {
+        'react-datepicker__day--weekend': holidays
+      }
+    ];
+  }
+
+  handleChange({ fromDate, toDate }) {
+    fromDate = fromDate || this.state.fromDate;
+    toDate = toDate || this.state.toDate;
+
+    if (fromDate.getTime() > toDate.getTime()) {
+      toDate = fromDate;
+    }
+
+    this.setState({ fromDate, toDate });
+  }
+
+  handleChangeStart(fromDate) {
+    this.handleChange({ fromDate });
+  }
+
+  handleChangeEnd(toDate) {
+    this.handleChange({ toDate });
   }
 
   onReady() {
@@ -89,10 +127,11 @@ class InputFormNew extends React.Component {
     const { classes } = this.props;
 
     const { userName, fromDate, toDate, documentDate, deputy, isPaid } = this.state;
-    const numberOfDays = countDays(fromDate, toDate);
+    const numberOfDays = countDays(new Date(fromDate), new Date(toDate));
     const position = getUser(userName).position;
     const users = getUsers();
     const deputies = getDeputiesFor(userName);
+    const highlightedDates = this.highlightDates();
 
     return (
       <main className={classes.layout}>
@@ -158,28 +197,25 @@ class InputFormNew extends React.Component {
                 годишен отпуск, считано от{' '}
                 {
                   <DatePicker
-                    filterDate={isWorkingDay}
+                    // filterDate={isWorkingDay}
+                    highlightDates={highlightedDates}
+                    selected={fromDate}
+                    onChange={this.handleChangeStart}
                     className={classes.userInput}
                     id="fromDate"
                     dateFormat="dd.MM.yyyy"
-                    selected={fromDate}
-                    onChange={date => {
-                      this.setState({ fromDate: date });
-                    }}
                   />
                 }{' '}
                 до{' '}
                 {
                   <DatePicker
-                    filterDate={isWorkingDay}
+                    // filterDate={isWorkingDay}
+                    highlightDates={highlightedDates}
+                    selected={toDate}
+                    onChange={this.handleChangeEnd}
                     className={classes.userInput}
                     id="toDate"
                     dateFormat="dd.MM.yyyy"
-                    minDate={fromDate}
-                    selected={fromDate <= toDate ? toDate : fromDate}
-                    onChange={date => {
-                      this.setState({ toDate: date });
-                    }}
                   />
                 }{' '}
                 включително.

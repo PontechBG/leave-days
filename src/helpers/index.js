@@ -9,10 +9,12 @@ export function generateId(text) {
 }
 
 export function countDays(fromDate, toDate) {
-  let count = 1;
+  fromDate.setHours(0, 0, 0, 0);
+  toDate.setHours(0, 0, 0, 0);
+  let count = 0;
   let curDate = new Date(fromDate);
 
-  while (curDate < toDate) {
+  while (curDate <= toDate) {
     count += isWorkingDay(curDate) ? 1 : 0;
     // add one day
     curDate = new Date(curDate);
