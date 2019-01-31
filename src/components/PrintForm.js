@@ -53,7 +53,7 @@ export class PrintForm extends React.Component {
               До
             </Typography>
             <Typography variant="subtitle1" align="left" gutterBottom>
-              Управителя на Понтех БГ ЕООД
+              Управителя на Понтех БГ ООД
             </Typography>
           </Grid>
           <Grid item xs={12} />
@@ -121,7 +121,7 @@ export class PrintForm extends React.Component {
           <Grid item xs={12} />
           <Grid item xs={12}>
             <Typography variant="subtitle1" align="center">
-              Понтех БГ ЕООД, бул. Христо Смирненски 23, www.pontech.bg
+              Понтех БГ ООД, бул. Христо Смирненски 23, www.pontech.bg
             </Typography>
           </Grid>
         </Grid>
