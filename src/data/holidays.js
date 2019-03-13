@@ -13,11 +13,15 @@ let year = 2019;
 let holidays = [
   'YYYY/01/01',
   'YYYY/03/03',
+  'YYYY/03/04',
+  'YYYY/04/26',
+  'YYYY/04/29',
   'YYYY/05/01',
   'YYYY/05/06',
   'YYYY/05/24',
   'YYYY/09/06',
   'YYYY/09/22',
+  'YYYY/09/23',
   'YYYY/12/24',
   'YYYY/12/25',
   'YYYY/12/26'
