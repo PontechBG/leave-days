@@ -16,6 +16,8 @@ import { holidays } from '../data/holidays';
 import DatePicker from 'react-datepicker';
 import red from '@material-ui/core/colors/red';
 
+import appInfo from '../../package.json';
+
 const styles = theme => ({
   layout: {
     width: '100%',
@@ -265,6 +267,9 @@ class InputFormNew extends React.Component {
                 Принтирай
               </Button>
             </Grid>
+            <Typography variant="caption" align="right" gutterBottom>
+              v{appInfo.version}
+            </Typography>
           </Paper>
         </Grid>
       </main>

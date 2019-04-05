@@ -1,3 +1,23 @@
+# Pontech BG - Leave days app
+
+This app can be used for printing notices for leave days.
+
+## Managing users
+
+You can manage users in `src/data/users.js` file.
+
+## Managing holidays
+
+Holidays can be set in `src/data/holidays.js` file. Holidays must be set each year otherwise the total number of leave days will be calculated wrong.
+
+## Releases
+
+- **0.1.1** - 05.04.2019:
+  - new user added: Angel
+  - display current verion in input form
+
+---
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
