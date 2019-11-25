@@ -1,19 +1,16 @@
 import expect from 'expect';
-import React from 'react';
 import { holidays, yearHasChanged } from './holidays';
 
 describe('Holidays tests', () => {
   it('Dates are passed successfully', () => {
-    holidays.map(day => {
+    holidays.forEach(day => {
       expect(typeof day).toBe('object');
       expect(typeof day.getYear()).toBe('number');
     });
   });
 
   it('Is using current year', () => {
-    const currentYear = new Date();
-
-    expect(yearHasChanged(currentYear)).toBe(false);
+    expect(yearHasChanged(new Date())).toBe(false);
   });
 
   it('Check for year change', () => {

@@ -8,7 +8,7 @@ You can manage users in `src/data/users.js` file.
 
 ## Managing holidays
 
-Holidays can be set in `src/data/holidays.js` file. Holidays must be set each year otherwise the total number of leave days will be calculated wrong.
+Holidays can be set in `src/data/holidays.js` file. Holidays must be set each year otherwise the total number of leave days will be calculated wrong. Change `currentYear` value and put all holidays for next year in the array.
 
 ## Releases
 
