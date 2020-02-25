@@ -18,7 +18,7 @@
 // 22 септември – Ден на независимостта на България.
 // 24, 25, 26 декември – Коледа.
 
-const currentYear = 2019;
+const currentYear = 2020;
 
 const yearHasChanged = date => {
   return date.getFullYear() !== currentYear;

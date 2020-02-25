@@ -32,13 +32,13 @@ describe('MainPage tests', () => {
 
   it("Should update based on 'isPaid' property", () => {
     let wrapper = shallow(<PrintForm {...props} />);
-    let element = wrapper.find(Typography).get(7);
+    let element = wrapper.find(Typography).get(6);
     expect(element.props.children.indexOf('платен')).toEqual(5);
     expect(element.props.children.indexOf('неплатен')).toEqual(-1);
 
     props.isPaid = false;
     wrapper = shallow(<PrintForm {...props} />);
-    element = wrapper.find(Typography).get(7);
+    element = wrapper.find(Typography).get(6);
     expect(element.props.children.indexOf('платен')).toEqual(-1);
     expect(element.props.children.indexOf('неплатен')).toEqual(5);
   });
