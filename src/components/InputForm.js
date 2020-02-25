@@ -137,17 +137,17 @@ class InputFormNew extends React.Component {
 
     return (
       <main className={classes.layout}>
-        <Grid container spacing={24} justify="center">
+        <Grid container spacing={24} justify='center'>
           <Paper className={classes.paper}>
             <Grid item xs={12}>
-              <Typography variant="h5" align="center" gutterBottom>
+              <Typography variant='h5' align='center' gutterBottom>
                 <b>Молба за ползване на отпуск</b>
               </Typography>
             </Grid>
             <Grid item xs={8} />
             <Fade in={true} timeout={1000}>
               <Grid item xs={12}>
-                <Typography variant="subtitle1">От</Typography>
+                <Typography variant='subtitle1'>От</Typography>
                 <Select
                   autoFocus
                   className={classes.userInput}
@@ -170,16 +170,13 @@ class InputFormNew extends React.Component {
               </Grid>
             </Fade>
             <Grid item xs={12}>
-              <Typography variant="subtitle1" align="center" gutterBottom>
+              <Typography variant='subtitle1' align='center' gutterBottom>
                 Длъжност: {position}
               </Typography>
             </Grid>
             <Grid item xs={12}>
-              <Typography variant="subtitle1" align="left" gutterBottom>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Уважаеми г-н Управител,
-              </Typography>
-              <Typography variant="subtitle1" align="justify" gutterBottom>
-                &nbsp;&nbsp;&nbsp;&nbsp;Моля да ми разрешите използването на {numberOfDays} {numberOfDays === 1 ? 'ден' : 'дни'}{' '}
+              <Typography variant='subtitle1' align='justify' gutterBottom>
+                &nbsp;&nbsp;&nbsp;&nbsp;Бих желал/а ползването на {numberOfDays} {numberOfDays === 1 ? 'ден' : 'дни'}{' '}
                 {
                   <FormControlLabel
                     control={
@@ -204,8 +201,8 @@ class InputFormNew extends React.Component {
                     selected={fromDate}
                     onChange={this.handleChangeStart}
                     className={classes.userInput}
-                    id="fromDate"
-                    dateFormat="dd.MM.yyyy"
+                    id='fromDate'
+                    dateFormat='dd.MM.yyyy'
                   />
                 }{' '}
                 до{' '}
@@ -216,13 +213,13 @@ class InputFormNew extends React.Component {
                     selected={toDate}
                     onChange={this.handleChangeEnd}
                     className={classes.userInput}
-                    id="toDate"
-                    dateFormat="dd.MM.yyyy"
+                    id='toDate'
+                    dateFormat='dd.MM.yyyy'
                   />
                 }{' '}
                 включително.
               </Typography>
-              <Typography variant="subtitle1" align="justify" gutterBottom>
+              <Typography variant='subtitle1' align='justify' gutterBottom>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;По време на отпуската ще бъда заместван от{' '}
                 {
                   <Select
@@ -246,14 +243,14 @@ class InputFormNew extends React.Component {
               </Typography>
             </Grid>
             <Grid item xs={12}>
-              <Typography variant="subtitle1" align="left">
+              <Typography variant='subtitle1' align='left'>
                 Датa:&nbsp;
                 {
                   <DatePicker
                     filterDate={isWorkingDay}
                     className={classes.userInput}
-                    id="documentDate"
-                    dateFormat="dd.MM.yyyy"
+                    id='documentDate'
+                    dateFormat='dd.MM.yyyy'
                     selected={documentDate}
                     onChange={date => {
                       this.setState({ documentDate: date });
@@ -263,11 +260,11 @@ class InputFormNew extends React.Component {
               </Typography>
             </Grid>
             <Grid style={{ textAlign: 'center' }} item xs={12}>
-              <Button variant="contained" color="primary" onClick={this.onReady}>
+              <Button variant='contained' color='primary' onClick={this.onReady}>
                 Принтирай
               </Button>
             </Grid>
-            <Typography variant="caption" align="right" gutterBottom>
+            <Typography variant='caption' align='right' gutterBottom>
               v{appInfo.version}
             </Typography>
           </Paper>
