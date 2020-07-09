@@ -7,7 +7,7 @@ import { withStyles } from '@material-ui/core/styles';
 import { formatDate } from '../helpers';
 import { getUser } from '../data/users';
 
-const styles = theme => ({
+const styles = (theme) => ({
   layout: {
     width: '100%',
     maxWidth: 700,
@@ -17,14 +17,14 @@ const styles = theme => ({
     [theme.breakpoints.up(1100 + theme.spacing.unit * 3 * 2)]: {
       width: 1100,
       marginLeft: 'auto',
-      marginRight: 'auto'
-    }
-  }
+      marginRight: 'auto',
+    },
+  },
 });
 
 export class PrintForm extends React.Component {
   state = {
-    company: 'ПОНТЕХ БГ ООД'
+    company: 'ПОНТЕХ БГ ООД',
   };
 
   componentDidMount() {
@@ -33,7 +33,7 @@ export class PrintForm extends React.Component {
 
   render() {
     const { company } = this.state;
-    const { classes, userName, deputy, fromDate, documentDate, numberOfDays, toDate, isPaid } = this.props;
+    const { classes, userName, deputy, fromDate, documentDate, numberOfDays, toDate, additionalText, isPaid } = this.props;
 
     const position = getUser(userName).position;
 
@@ -84,10 +84,13 @@ export class PrintForm extends React.Component {
             <Typography variant='subtitle1' align='justify' gutterBottom>
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;По време на отпуската ще бъда заместван/а от {deputy}.
             </Typography>
+            <Typography variant='subtitle1' align='justify' gutterBottom>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{additionalText}
+            </Typography>
           </Grid>
           <Grid item xs={12} />
-          <Grid item xs={12} />
-          <Grid item xs={12} />
+          {/* <Grid item xs={12} /> */}
+          {/* <Grid item xs={12} /> */}
 
           <Grid item xs={6} />
           <Grid item xs={6}>
@@ -122,8 +125,8 @@ export class PrintForm extends React.Component {
           </Grid>
           <Grid item xs={12} />
           <Grid item xs={12} />
-          <Grid item xs={12} />
-          <Grid item xs={12} />
+          {/* <Grid item xs={12} /> */}
+          {/* <Grid item xs={12} /> */}
           <Grid item xs={12}>
             <Typography variant='subtitle1' align='center'>
               {company}
@@ -143,7 +146,8 @@ PrintForm.propTypes = {
   toDate: PropTypes.object.isRequired,
   documentDate: PropTypes.object.isRequired,
   numberOfDays: PropTypes.number.isRequired,
-  isPaid: PropTypes.bool.isRequired
+  additionalText: PropTypes.string,
+  isPaid: PropTypes.bool.isRequired,
 };
 
 export default withStyles(styles)(PrintForm);

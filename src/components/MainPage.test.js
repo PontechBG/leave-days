@@ -29,7 +29,7 @@ describe('MainPage tests', () => {
   it('Renders <InputForm> when not ready for print', done => {
     const wrapper = mount(<MainPage classes={{}} />);
     wrapper.setState(state, () => {
-      expect(wrapper.find('input').length).toBe(6);
+      expect(wrapper.find('input').length).toBe(7);
       done();
     });
   });

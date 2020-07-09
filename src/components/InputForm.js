@@ -9,6 +9,7 @@ import Switch from '@material-ui/core/Switch';
 import Button from '@material-ui/core/Button';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
+import Input from '@material-ui/core/Input';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import { getUser, getUsers, getDeputiesFor } from '../data/users';
 import { isWorkingDay, countDays } from '../helpers';
@@ -18,7 +19,7 @@ import red from '@material-ui/core/colors/red';
 
 import appInfo from '../../package.json';
 
-const styles = theme => ({
+const styles = (theme) => ({
   layout: {
     width: '100%',
     maxWidth: 700,
@@ -28,11 +29,11 @@ const styles = theme => ({
     [theme.breakpoints.up(1100 + theme.spacing.unit * 3 * 2)]: {
       width: 1100,
       marginLeft: 'auto',
-      marginRight: 'auto'
-    }
+      marginRight: 'auto',
+    },
   },
   paper: {
-    padding: 30
+    padding: 30,
   },
   textField: {
     padding: 0,
@@ -40,11 +41,11 @@ const styles = theme => ({
     backgroundColor: red[100],
     marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit,
-    width: 50
+    width: 50,
   },
   userInput: {
-    backgroundColor: red[100]
-  }
+    backgroundColor: red[100],
+  },
 });
 
 class InputFormNew extends React.Component {
@@ -63,7 +64,8 @@ class InputFormNew extends React.Component {
       numberOfDays: 0,
       documentDate: new Date(),
       deputy: initialDeputyName,
-      isPaid: true
+      additionalText: null,
+      isPaid: true,
     };
 
     this.highlightDates = this.highlightDates.bind(this);
@@ -77,14 +79,14 @@ class InputFormNew extends React.Component {
   highlightDates() {
     return [
       {
-        'react-datepicker__day--highlighted-from-date': [this.state.fromDate]
+        'react-datepicker__day--highlighted-from-date': [this.state.fromDate],
       },
       {
-        'react-datepicker__day--highlighted-to-date': [this.state.toDate]
+        'react-datepicker__day--highlighted-to-date': [this.state.toDate],
       },
       {
-        'react-datepicker__day--weekend': holidays
-      }
+        'react-datepicker__day--weekend': holidays,
+      },
     ];
   }
 
@@ -121,7 +123,7 @@ class InputFormNew extends React.Component {
   onFieldChange(event) {
     const fieldName = event.target.name;
     this.setState({
-      [fieldName]: fieldName === 'isPaid' ? event.target.checked : event.target.value
+      [fieldName]: fieldName === 'isPaid' ? event.target.checked : event.target.value,
     });
   }
 
@@ -156,10 +158,10 @@ class InputFormNew extends React.Component {
                   onChange={this.onFieldChange}
                   inputProps={{
                     name: 'userName',
-                    id: 'userName'
+                    id: 'userName',
                   }}
                 >
-                  {users.map(user => {
+                  {users.map((user) => {
                     return (
                       <MenuItem key={user.id} value={user.name}>
                         {user.name}
@@ -184,7 +186,7 @@ class InputFormNew extends React.Component {
                         checked={isPaid}
                         inputProps={{
                           name: 'isPaid',
-                          id: 'isPaid'
+                          id: 'isPaid',
                         }}
                         onChange={this.onFieldChange}
                         value={isPaid}
@@ -228,10 +230,10 @@ class InputFormNew extends React.Component {
                     onChange={this.onFieldChange}
                     inputProps={{
                       name: 'deputy',
-                      id: 'deputy'
+                      id: 'deputy',
                     }}
                   >
-                    {deputies.map(user => {
+                    {deputies.map((user) => {
                       return (
                         <MenuItem key={user.id} value={user.name}>
                           {user.name}
@@ -240,6 +242,17 @@ class InputFormNew extends React.Component {
                     })}
                   </Select>
                 }
+              </Typography>
+              <Typography variant='subtitle1' align='justify' gutterBottom>
+                Допълнителен текст <br />
+                <Input
+                  id='filled-basic'
+                  className={classes.userInput}
+                  fullWidth
+                  onChange={(event) => {
+                    this.setState({ additionalText: event.target.value });
+                  }}
+                />
               </Typography>
             </Grid>
             <Grid item xs={12}>
@@ -252,7 +265,7 @@ class InputFormNew extends React.Component {
                     id='documentDate'
                     dateFormat='dd.MM.yyyy'
                     selected={documentDate}
-                    onChange={date => {
+                    onChange={(date) => {
                       this.setState({ documentDate: date });
                     }}
                   />
@@ -276,7 +289,7 @@ class InputFormNew extends React.Component {
 
 InputFormNew.propTypes = {
   classes: PropTypes.object.isRequired,
-  onReady: PropTypes.func.isRequired
+  onReady: PropTypes.func.isRequired,
 };
 
 export default withStyles(styles)(InputFormNew);

@@ -6,7 +6,7 @@ import YearWarningDialog from './YearWarningDialog';
 import InputForm from './InputForm';
 import PrintForm from './PrintForm';
 
-const styles = theme => ({
+const styles = (theme) => ({
   layout: {
     width: '100%',
     marginLeft: theme.spacing.unit * 3,
@@ -15,9 +15,9 @@ const styles = theme => ({
     [theme.breakpoints.up(1100 + theme.spacing.unit * 3 * 2)]: {
       width: 1100,
       marginLeft: 'auto',
-      marginRight: 'auto'
-    }
-  }
+      marginRight: 'auto',
+    },
+  },
 });
 
 export class MainPage extends React.Component {
@@ -31,7 +31,8 @@ export class MainPage extends React.Component {
       fromDate: new Date(),
       toDate: new Date(),
       deputy: '',
-      isPaid: true
+      additionalText: '',
+      isPaid: true,
     };
 
     this.onReady = this.onReady.bind(this);
@@ -47,19 +48,20 @@ export class MainPage extends React.Component {
       documentDate: data.documentDate,
       numberOfDays: data.numberOfDays,
       deputy: data.deputy,
-      isPaid: data.isPaid
+      additionalText: data.additionalText,
+      isPaid: data.isPaid,
     });
   }
 
   onYearWarningDialogClose() {
     this.setState({
-      yearWarning: false
+      yearWarning: false,
     });
   }
 
   render() {
     const { classes } = this.props;
-    const { yearWarning, isReadyForPrint, userName, fromDate, toDate, documentDate, numberOfDays, deputy, isPaid } = this.state;
+    const { yearWarning, isReadyForPrint, userName, fromDate, toDate, documentDate, numberOfDays, deputy, additionalText, isPaid } = this.state;
 
     return (
       <main className={classes.layout}>
@@ -72,6 +74,7 @@ export class MainPage extends React.Component {
             documentDate={documentDate}
             numberOfDays={numberOfDays}
             deputy={deputy}
+            additionalText={additionalText}
             isPaid={isPaid}
           />
         ) : (
@@ -83,7 +86,7 @@ export class MainPage extends React.Component {
 }
 
 MainPage.propTypes = {
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
 };
 
 export default withStyles(styles)(MainPage);

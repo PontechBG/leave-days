@@ -12,6 +12,10 @@ Holidays can be set in `src/data/holidays.js` file. Holidays must be set each ye
 
 ## Releases
 
+- **1.1.0** - 09.07.2020:
+  - update user work positions
+  - add additional text field to the input form for adding a descriptive text
+
 - **0.1.1** - 05.04.2019:
   - new user added: Angel
   - display current verion in input form
