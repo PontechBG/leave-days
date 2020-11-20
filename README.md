@@ -10,6 +10,15 @@ You can manage users in `src/data/users.js` file.
 
 Holidays can be set in `src/data/holidays.js` file. Holidays must be set each year otherwise the total number of leave days will be calculated wrong. Change `currentYear` value and put all holidays for next year in the array.
 
+## publicPath
+
+To be able to serve this app in IIS change `publicPath` (file: node_modules\react-scripts\config\webpack.config.js):
+```js
+// We inferred the "public path" (such as / or /my-project) from homepage.
+// We use "/" in development.
+publicPath: './', //publicPath,
+```
+
 ## Releases
 
 - **1.1.0** - 09.07.2020:
