@@ -1,6 +1,6 @@
 {
   "name": "leave-days",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "private": true,
   "homepage": "https://ugis.pontech.bg/molba",
   "dependencies": {
@@ -16,8 +16,9 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build && npm run test",
+    "build": "npm run test-no-watch && react-scripts build",
     "test": "react-scripts test",
+    "test-no-watch": "react-scripts test --watchAll=false",
     "eject": "react-scripts eject",
     "patch": "npm version patch --no-git-tag-version",
     "minor": "npm version minor --no-git-tag-version",
